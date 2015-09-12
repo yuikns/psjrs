@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true">
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/valkyrie.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>logs/valkyrie.log.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d %p %t %c - %m -- valkyrie said ~%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!-- <appender name="LOGSTASH" -->
+	<!-- class="net.logstash.logback.appender.LogstashTcpSocketAppender"> -->
+	<!-- <remoteHost>127.0.0.1</remoteHost> -->
+	<!-- <port>23333</port> -->
+	<!-- <encoder class="net.logstash.logback.encoder.LogstashEncoder" /> -->
+	<!-- </appender> -->
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>%d %p %t %c - %m -- valkyrie said ~%n</Pattern>
+		</encoder>
+	</appender>
+
+	<!--<root level="${root-level:-DEBUG}"> -->
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+		<!-- <appender-ref ref="LOGSTASH" /> -->
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</configuration>

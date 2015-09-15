@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "net.ceedubs" %% "ficus" % "1.1.2",
   "com.adrianhurt" %% "play-bootstrap3" % "0.4.4-P24",
   "net.liftweb" % "lift-webkit_2.11" % "3.0-M6",
+  "commons-pool" % "commons-pool" % "1.6", // pool for utils.sock.SockPool
   "com.mohiva" %% "play-silhouette-testkit" % "3.0.0" % "test",
   specs2 % Test,
   cache,

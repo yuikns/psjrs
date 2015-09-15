@@ -111,6 +111,12 @@ object StringHelper {
       net.liftweb.json.JsonParser.parse(s).values
     }
 
+    def parseJsonOrigin = {
+      //implicit val formats = net.liftweb.json.DefaultFormats
+      implicit val formats = jsonFormatsWithDateTime
+      net.liftweb.json.JsonParser.parse(s)
+    }
+
     def parseJsonToListOrElse(or: List[Any]) = parseJsonToList match {
       case Some(v: List[Any]) => v
       case None => or

@@ -6,6 +6,9 @@
 GET          /                                        controllers.ApplicationController.index
 GET          /favicon.ico                             controllers.Assets.at(path="/public", file="favicon.ico")
 
+# Test router
+GET         /query/:param                              controllers.ApplicationController.query(param:String)
+
 POST         /api/auth/signup                         controllers.auth.AuthorizationController.signUp
 POST         /api/auth/signout                        controllers.auth.AuthorizationController.signOut
 POST         /api/auth/credentials                    controllers.auth.CredentialsAuthController.authenticate

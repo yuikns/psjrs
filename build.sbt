@@ -6,11 +6,12 @@ version := "1.0.0"
 
 scalaVersion := "2.11.7"
 
-resolvers := ("Atlassian Releases" at "https://maven.atlassian.com/public/") +: resolvers.value
+//commentary by kuizhi.feng for upgrade sources to maven.oschain.com
+//resolvers := ("Atlassian Releases" at "https://maven.atlassian.com/public/") +: resolvers.value
 
-resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+//resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 
-resolvers += Resolver.sonatypeRepo("snapshots")
+//resolvers += Resolver.sonatypeRepo("snapshots")
 
 libraryDependencies ++= Seq(
   "com.mohiva" %% "play-silhouette" % "3.0.0",

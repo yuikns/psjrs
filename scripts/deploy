@@ -1,0 +1,5 @@
+#!/bin/sh
+sbt compile dist
+ln -sf `pwd`/scripts/psjrs-launcher target/universal/
+cd target/universal/ && unzip psjrs-0.0.1.zip && ln -sf psjrs-0.0.1 psjrs-current
+

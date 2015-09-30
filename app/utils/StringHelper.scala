@@ -31,13 +31,9 @@ object StringHelper {
     val r = new scala.util.Random
     val sb = new StringBuilder
     for (i <- 1 to len) {
-      sb.append(alphabetUC.charAt(r.nextInt.abs % alphabetUC.length))
+      sb.append(alphabetUC.charAt(r.nextInt().abs % alphabetUC.length))
     }
-    sb.toString
-  }
-
-  def name2Token(name: String) = {
-    name.toLowerCase.trim.replace("-", "").replace(". ", " ").replace(".", "")
+    sb.toString()
   }
 
   def toJson(a: Any, compact: Boolean = true) = {
@@ -137,7 +133,7 @@ object StringHelper {
 
     def deserialize(implicit format: Formats): PartialFunction[(TypeInfo, JValue), DateTime] = {
       case (TypeInfo(DateTimeClass, _), json) => json match {
-        case JInt(millis) => new DateTime(millis.longValue)
+        case JInt(millis) => new DateTime(millis.longValue())
         case x => throw new MappingException("Can't convert " + x + " to DateTime")
       }
     }

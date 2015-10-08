@@ -8,7 +8,7 @@ __PSJRS__ is just a short name of "Play Silhouette Jwt Restful Seed" and it is b
 You may just clone this project and type `sbt run` and it will start a new web service and listening port 9000 in default.
 
 ```
-~ $ git clone git@github.com:yuikns/psjrs.git
+~ $ git clone --recurse-submodules git@github.com:yuikns/psjrs.git
 ~ $ cd psjrs
 ~/psjrs $ sbt run
 [info] Loading project definition from ~/psjrs/project

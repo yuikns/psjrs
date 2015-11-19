@@ -18,10 +18,10 @@ object CompileSettings extends AutoPlugin {
       "-Ywarn-nullary-override", // Warn when non-nullary overrides nullary, e.g. def foo() over def foo.
       "-Ywarn-numeric-widen", // Warn when numerics are widened.
       "-Yinline-warnings", //
-      "-language:postfixOps", // See the Scala docs for value scala.language.postfixOps for a discussion
-      "-target:jvm-1.8" // force use jvm 1.8
+      "-language:postfixOps" // See the Scala docs for value scala.language.postfixOps for a discussion
+      //, "-target:jvm-1.8" // force use jvm 1.8
     ),
-    javacOptions in compile ++= Seq("-target", "1.8", "-source", "1.8"), // force use jvm 1.8
+    //javacOptions in compile ++= Seq("-target", "1.8", "-source", "1.8"), // force use jvm 1.8
     compileOrder in Compile := CompileOrder.Mixed,
     compileOrder in Test := CompileOrder.Mixed,
     testOptions in Test += Tests.Argument(TestFrameworks.Specs2, "junitxml", "console"),

@@ -19,7 +19,7 @@ object CompileSettings extends AutoPlugin {
       "-Ywarn-numeric-widen", // Warn when numerics are widened.
       "-Yinline-warnings", //
       "-language:postfixOps" // See the Scala docs for value scala.language.postfixOps for a discussion
-      //, "-target:jvm-1.8" // force use jvm 1.8
+    //, "-target:jvm-1.8" // force use jvm 1.8
     ),
     //javacOptions in compile ++= Seq("-target", "1.8", "-source", "1.8"), // force use jvm 1.8
     compileOrder in Compile := CompileOrder.Mixed,

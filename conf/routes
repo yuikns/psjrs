@@ -11,7 +11,8 @@ POST         /api/auth/signout                        controllers.auth.Authoriza
 POST         /api/auth/credentials                    controllers.auth.CredentialsAuthController.authenticate
 GET          /api/auth/social/:provider               controllers.auth.SocialAuthController.authenticate(provider)
 
-
+# Get Me
+GET          /api/auth/me                             controllers.ApplicationController.getMe
 
 # Map static resources from the /public folder to the / URL path
 GET         /*file                            controllers.Assets.at(path="/public", file)

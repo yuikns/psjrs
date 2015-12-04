@@ -35,6 +35,24 @@ class ApplicationController @Inject() (
       Ok(
         Map[String, Any](
           "status" -> true,
-          "message" -> Messages("banner.sys")).toJson(false))))
+          "message" -> Messages("banner.sys")).toJson(false)).
+        as("application/json")))
 
+  def getMe = UserAwareAction.async { implicit request =>
+    Future.successful({
+      request.identity match {
+        case Some(user) =>
+          Ok(Map[String, Any](
+            "status" -> true,
+            "message" -> s"Hello, ${user.fullName} <${user.email}>"
+          ).toJson)
+        case None =>
+          Unauthorized(
+            Map[String, Any](
+              "status" -> false,
+              "message" -> "user.not_authorizaed"
+            ).toJson)
+      }
+    }.as("application/json"))
+  }
 }

@@ -59,14 +59,18 @@ class CredentialsAuthController @Inject() (
           case Some(user) =>
             val c = configuration.underlying
             env.authenticatorService.create(loginInfo).map {
-              case authenticator if (data.persist.isDefined && data.persist.get) =>
+              case authenticator if data.persist.isDefined && data.persist.get =>
                 authenticator.copy(
                   expirationDateTime = clock.now + c.as[FiniteDuration]("silhouette.authenticator.rememberMe.authenticatorExpiry"))
               case authenticator => authenticator
             }.flatMap { authenticator =>
               env.eventBus.publish(LoginEvent(user, request, request2Messages))
               env.authenticatorService.init(authenticator).flatMap { v =>
-                env.authenticatorService.embed(v, Ok(Map[String, Any]("status" -> true, "token" -> v).toJson))
+                env.authenticatorService.embed(v,
+                  Ok(Map[String, Any]("status" -> true,
+                    "token" -> v).
+                    toJson)
+                    .as("application/json"))
               }
             }
           case None =>
@@ -74,14 +78,18 @@ class CredentialsAuthController @Inject() (
         }
       }.recover {
         case e =>
-          Unauthorized(Map[String, Any]("status" -> false, "message" -> Messages("credentials.invalid")).toJson)
+          Unauthorized(Map[String, Any]("status" -> false,
+            "message" -> Messages("credentials.invalid")).toJson).
+            as("application/json")
       }
     }.recoverTotal {
       case error =>
         println("error:" + error)
         Future.successful(
           InternalServerError(
-            Map[String, Any]("status" -> false, "message" -> Messages("data.invalid")).toJson))
+            Map[String, Any]("status" -> false,
+              "message" -> Messages("data.invalid")).toJson)
+            .as("application/json"))
     }
   }
 }

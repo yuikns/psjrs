@@ -50,7 +50,9 @@ class AuthorizationController @Inject() (
         case Some(user) =>
           Future.successful(
             BadRequest(
-              Map[String, Any]("status" -> false, "message" -> Messages("user.exists")).toJson))
+              Map[String, Any]("status" -> false,
+                "message" -> Messages("user.exists")).toJson)
+              .as("application/json"))
         case None =>
           val authInfo = passwordHasher.hash(data.password)
           val user = User(
@@ -71,7 +73,8 @@ class AuthorizationController @Inject() (
               embed(
                 value,
                 Ok(Map[String, Any]("status" -> true,
-                  "token" -> value).toJson))
+                  "token" -> value).toJson)
+                  .as("application/json"))
           } yield {
             env.eventBus.publish(SignUpEvent(user, request, request2Messages))
             env.eventBus.publish(LoginEvent(user, request, request2Messages))
@@ -83,7 +86,8 @@ class AuthorizationController @Inject() (
         Future.successful(
           InternalServerError(
             Map[String, Any]("status" -> false,
-              "message" -> Messages("data.invalid", error)).toJson))
+              "message" -> Messages("data.invalid", error)).toJson)
+            .as("application/json"))
     }
   }
 
@@ -96,7 +100,8 @@ class AuthorizationController @Inject() (
         Future.successful(
           InternalServerError(
             Map[String, Any]("status" -> false,
-              "message" -> Messages("user.signout_error", t.getLocalizedMessage)).toJson))
+              "message" -> Messages("user.signout_error", t.getLocalizedMessage)).toJson).
+            as("application/json"))
     }
   }
 
